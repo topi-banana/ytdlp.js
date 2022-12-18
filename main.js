@@ -1,6 +1,19 @@
 const exec = require('child_process').execSync
 
-const path = `${__dirname}/yt-dlp`
+switch(process.platform){
+case 'win32':
+    var runsh = 'yt-dlp.exe'
+    break
+case 'darwin':
+    var runsh = 'yt-dlp_macos'
+    break
+case 'linux':
+    var runsh = 'yt-dlp_linux'
+    break
+default:
+    throw 'Platform not supported.'
+}
+const path = `${__dirname}/ytdlp-releases/${runsh}`
 const ytdl = {
 dl: (url,option) => {
     try{
