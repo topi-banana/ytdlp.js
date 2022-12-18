@@ -1,6 +1,6 @@
 const exec = require('child_process').execSync
 
-const path = './yt-dlp'
+const path = `${__dirname}/yt-dlp`
 const ytdl = {
 dl: (url,option) => {
     try{
