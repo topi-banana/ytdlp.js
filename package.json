@@ -1,6 +1,6 @@
 {
   "name": "ytdlp.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "yt-dlp on Node.js",
   "main": "main.js",
   "scripts": {
