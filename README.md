@@ -3,6 +3,9 @@ yt-dlp on Node.js
 
 ## 導入
 
+```sh
+npm install ytdlp.js
+```
 ```js
 const ytdlp = require('ytdlp.js')
 ```
