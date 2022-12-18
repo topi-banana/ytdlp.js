@@ -1,52 +1,43 @@
-# まじで「てきとー」に作ったので今後改良していくんでごめんなさい
-
 # ytdlp.js
 yt-dlp on Node.js
 
+## 導入
 
-パスの指定が結構シビアなので注意
-
-## yt-dlp 本体の導入
-[yt-dlp](https://github.com/yt-dlp/yt-dlp)のダウンロード後、実行ファイルにパスを通す必要があります。
-
-main.jsの3行目付近の
+```js
+const ytdlp = require('ytdlp.js')
 ```
-const path = './yt-dlp'
+## メソッド
+
+### 1.情報の取得
+
+```js
+ytdlp.info('https://youtu.be/5XcRbKUKSdY')
 ```
-を書き換えてください。
+第一引数にURLを与えます
 
-このパスは main.js からの相対パスではなく、インポートする側の（tester.jsのような）メインファイルからの相対パスを記入してください。
+連想配列が返ってって来ます。
+動画のタイトル,ID,説明 等
 
-
-## main.js の導入
-main.js　をダウンロードして tester.js のように `requier` で main.js のパスを指定してください。
-実行形式などは tester.js を参照してください
-
-## ダウンロードしたファイルの保存場所
-
-main.jsの9行目付近の
+### 2.ダウンロード
+```js
+ytdlp.dl('https://youtu.be/5XcRbKUKSdY',{
+    core: 3,
+    output: 'video',
+    audio: true,
+    format: 'mp3',
+})
 ```
-./list/%(id)s.%(ext)s
+第一引数にURLを、第二引数にオプションを与えます
+
 ```
-を書き換えてください。
+core : fragmentの同時ダウンロード数。デフォルトは "1"
 
-これは tester.js からの相対パスを指定してください。
+output : 出力するファイル名。デフォルトは "%(id)s.%(ext)s"
 
-`%(id)s` などでファイル名をカスタマイズすることが出来ます。
-詳しくは[公式ドキュメント](https://github.com/yt-dlp/yt-dlp#output-template)を確認してください。
+audio : 音声として出力するか。デフォルトは "false"
 
-## その他 yt-dlp のダウンロードオプションを変更する場合
+format : 出力拡張子。デフォルトは動画の場合 "mp4"、音声の場合 "mp3"
+```
+outputに動画idやタイトル、拡張子を入れることが出来ます。
 
-main.jsの7-12行目付近の配列はダウンロードオプションです。
-
-例えば、
-
-mp3ではなくwavで取得したい場合は
-`--audio-format mp3` を `--audio-format wav` に変更
-
-音源ではなく動画のまま取得したい場合は
-`-x` と `--audio-format mp3` を削除
-
-詳しくは[公式ドキュメント](https://github.com/yt-dlp/yt-dlp)をご覧ください。
-
-# まじでてきとーに作ったのごめんなさい。このあとちゃんと作ります。
+詳しくは[公式ドキュメント](https://github.com/yt-dlp/yt-dlp#output-template)の OUTPUT TEMPLATE をご覧ください。
