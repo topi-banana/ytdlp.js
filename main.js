@@ -42,8 +42,8 @@ info: url => {
 },
 update: ()=>{
     try{
-        const result = exec(`${path} --update`).toString()
-        return JSON.parse(result)
+        exec(`${path} --update`)
+        return true
     }catch(e){
         if(e.status != 0){
             throw e.stderr.toString()
