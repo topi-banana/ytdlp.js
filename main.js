@@ -39,6 +39,16 @@ info: url => {
             throw e.stderr.toString()
         }
     }
+},
+update: ()=>{
+    try{
+        const result = exec(`${path} --update`).toString()
+        return JSON.parse(result)
+    }catch(e){
+        if(e.status != 0){
+            throw e.stderr.toString()
+        }
+    }
 }
 }
 
