@@ -23,30 +23,30 @@ dl: (url,option) => {
             '--no-cache-dir',                           // no cache
             option.audio ? `-x --audio-format ${option.format || 'mp3'}` : `-f ${option.format}`,// audio only
         ].join(' ')}`)
-        return true
+        return { status: true }
     }catch(e){
         if(e.status != 0){
-            throw e.stderr.toString()
+            return { status: false, detail: e.stderr.toString() }
         }
     }
 },
 info: url => {
     try{
         const result = exec(`${path} ${url} -j`).toString()
-        return JSON.parse(result)
+        return { status: JSON.parse(result) }
     }catch(e){
         if(e.status != 0){
-            throw e.stderr.toString()
+            return { status: false, detail: e.stderr.toString() }
         }
     }
 },
 update: ()=>{
     try{
         exec(`${path} --update`)
-        return true
+        return { status: true }
     }catch(e){
         if(e.status != 0){
-            throw e.stderr.toString()
+            return { status: false, detail: e.stderr.toString() }
         }
     }
 }
