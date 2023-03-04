@@ -33,7 +33,7 @@ dl: (url,option) => {
 info: url => {
     try{
         const result = exec(`${path} ${url} -j`).toString()
-        return { status: JSON.parse(result) }
+        return { status: true, return: JSON.parse(result) }
     }catch(e){
         if(e.status != 0){
             return { status: false, detail: e.stderr.toString() }
